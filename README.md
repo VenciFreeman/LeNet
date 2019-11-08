@@ -1,4 +1,4 @@
-# DNN
+# simple_DNN
 
 ## Introduction
 
