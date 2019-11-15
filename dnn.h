@@ -24,7 +24,7 @@ typedef float b2_t;
 typedef float image_t;
 
 //==================== Define Your Functions here ====================//
-// This is an example top, you can modify it freely.
+// This is an example top, can be modified it freely.
 int dnn(
 		image_t input_image[IMAGE_SIZE],
 		w1_t w1[IMAGE_SIZE][HIDDEN_LAYER],

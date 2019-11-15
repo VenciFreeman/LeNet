@@ -1,4 +1,5 @@
 #include "dnn.h"
+#define max(a, b) (a > b ? a : b)
 
 int dnn(
 		image_t input_image[IMAGE_SIZE],
@@ -9,15 +10,30 @@ int dnn(
 )
 {
 	int label = 0; //label is the predicted result by dnn
-	//==================== Insert your code here ====================//
+	//==================== Insert code here ====================//
+	int i,j;
+	int hidden[HIDDEN_LAYER];
+	int output[OUTPUT_CLASS];
+	memset(hidden,0,sizeof(hidden[0]));
+	memset(output,0,sizeof(output[0]));
 	
-		// input_image[IMAGE_SIZE]*w1[IMAGE_SIZE][HIDDEN_LAYER]
-		// +b1[HIDDEN_LAYER]
-		// hidden[HIDDEN_LAYER] = ReLU(x)	// ReLU(x) = max(0,x)
-		// hidden[HIDDEN_LAYER]*w2[HIDDEN_LAYER][OUTPUT_CLASS]
-		// +b2[OUTPUT_CLASS]
-		// output[OUTPUT_CLASS]
-		// predict
+		for (i=0; i<HIDDEN_LAYER; i++) {  // input_image[IMAGE_SIZE]*w1[IMAGE_SIZE][HIDDEN_LAYER]
+			for (j=0; j<IMAGE_SIZE; j++) {
+				hidden[i] += input_image[j] * w1[j][i];
+			}
+			hidden[i] = max(0,hidden[i] + b1[i]);  // +b1[HIDDEN_LAYER] and ReLU(hidden[HIDDEN_LAYER]) = max(0,hidden[HIDDEN_LAYER])
+		}
+
+		for (i=0; i<OUTPUT_CLASS; i++) {  // hidden[HIDDEN_LAYER]*w2[HIDDEN_LAYER][OUTPUT_CLASS]
+			for (j=0; j<HIDDEN_LAYER; j++) {
+				output[i] += hidden[j] * w2[j][i];
+			}
+			output[i] += b2[i];  // +b2[OUTPUT_CLASS]
+
+			if (output[i]>label) {  // predict
+				label = output[i];
+			}
+		}
 
 	//===============================================================//
 	return label;
