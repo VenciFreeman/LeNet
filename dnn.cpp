@@ -10,7 +10,7 @@ int dnn(
 )
 {
 	int label = 0; //label is the predicted result by dnn
-    int i,j,key;
+    int i,j;
     float temp = 0;
     float hidden[HIDDEN_LAYER];
     float output[OUTPUT_CLASS];
@@ -31,10 +31,9 @@ int dnn(
         output[i] += b2[i];  // +b2[OUTPUT_CLASS]
         if (output[i] > temp) { // predict
             temp = output[i];
-            key = i;
+            label = i;
         }
     }
-
-    label = key;
+    
 	return label;
 }
