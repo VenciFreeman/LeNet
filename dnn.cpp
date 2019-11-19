@@ -10,8 +10,6 @@ int dnn(
 )
 {
 	int label = 0; //label is the predicted result by dnn
-	//==================== Insert code here ====================//
-
     int i,j,key;
     float temp = 0;
     float hidden[HIDDEN_LAYER];
@@ -38,7 +36,5 @@ int dnn(
     }
 
     label = key;
-
-//===============================================================//
 	return label;
 }
