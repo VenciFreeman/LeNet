@@ -20,7 +20,7 @@ int main() {
 	fin2.open(ss2.str().c_str());
 	for(int i = 0; i < OUTPUT_CLASS; i++)
 		fin2 >> b2[i];
-	
+
 	ifstream fin3;
 	stringstream ss3;
 	ss3 << DATA_PATH << "W1.txt";
@@ -32,7 +32,7 @@ int main() {
 	ifstream fin4;
 	stringstream ss4;
 	ss4 << DATA_PATH << "Wout.txt";
-	fin4.open(ss4.str().c_str());		
+	fin4.open(ss4.str().c_str());
 	for(int i = 0; i < HIDDEN_LAYER; i++)
 		for(int j = 0; j < OUTPUT_CLASS; j++)
 			fin4 >> w2[i][j];
@@ -52,25 +52,25 @@ int main() {
 	b2_t b2_fp[OUTPUT_CLASS];
 
 	for(int i = 0; i < HIDDEN_LAYER; i++)
-		b1_fp[i] = b1_t(b1[i]);
+		b1_fp[i] = ftofx(b1[i]);
 	for(int i = 0; i < OUTPUT_CLASS; i++)
-		b2_fp[i] = b2_t(b2[i]);
+		b2_fp[i] = ftofx(b2[i]);
 	for(int i = 0; i < IMAGE_SIZE; i++)
 		for(int j = 0; j < HIDDEN_LAYER; j++)
-			w1_fp[i][j] = w1_t(w1[i][j]);
+			w1_fp[i][j] = ftofx(w1[i][j]);
 	for(int i = 0; i < HIDDEN_LAYER; i++)
 		for(int j = 0; j < OUTPUT_CLASS; j++)
-			w2_fp[i][j] = w2_t(w2[i][j]);
+			w2_fp[i][j] = ftofx(w2[i][j]);
 
 #ifdef PRINT_DEBUG
 	cout << "=================== Read Images ===================" << endl;
-#endif	
+#endif
 	int predict_labels[IMAGE_NUMS];
 	for(int i = 0; i < IMAGE_NUMS; i++) {
 		float image[IMAGE_SIZE];
 		ifstream fin;
-	    stringstream ss;
-	    ss << DATA_PATH << "/testImage/image" << i << ".txt";
+		stringstream ss;
+		ss << DATA_PATH << "/testImage/image" << i << ".txt";
 		fin.open(ss.str().c_str());
 		if(!fin) {
 			cout << "Open txt error in reading images";
@@ -81,14 +81,14 @@ int main() {
 
 		image_t image_fp[IMAGE_SIZE];
 		for(int j = 0; j < IMAGE_SIZE; j++)
-			image_fp[j] = image_t(image[j]);
+			image_fp[j] = ftofx(image[j]);
 
 		predict_labels[i] = dnn(image_fp, w1_fp, b1_fp, w2_fp, b2_fp);
 		fin.close();
 	}
 #ifdef PRINT_DEBUG
 	cout << "=================== Calculate Accuracy ===================" << endl;
-#endif	
+#endif
 	cout << "=================== Predict Labels ===================" << endl;
 	for(int i = 0; i < IMAGE_NUMS; i++)
 		cout << predict_labels[i] <<'\t';
