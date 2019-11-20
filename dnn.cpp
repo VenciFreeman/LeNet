@@ -1,5 +1,5 @@
 #include "dnn.h"
-#define ReLU(a, b) (a > b ? a : b)
+//#define ReLU(a, b) (a > b ? a : b)
 
 int dnn(
 		image_t input_image[IMAGE_SIZE],
@@ -20,14 +20,16 @@ int dnn(
 
     for (i=0; i<HIDDEN_LAYER; i++) {  // input_image[IMAGE_SIZE]*w1[IMAGE_SIZE][HIDDEN_LAYER]
         for (j=0; j<IMAGE_SIZE; j++) {
-            hidden[i] += mulfx(input_image[j],w1[j][i]);
+            hidden[i] += input_image[j] * w1[j][i];
         }
-        hidden[i] = ReLU(0,(hidden[i] + b1[i]));  // +b1[HIDDEN_LAYER] and ReLU(hidden[HIDDEN_LAYER]) = max(0,hidden[HIDDEN_LAYER])
+        if (hidden[i]+b1[i]>0) hidden[i]=hidden[i] + b1[i];
+        else hidden[i]=0;
+        //hidden[i] = ReLU(0,(hidden[i] + b1[i]));  // +b1[HIDDEN_LAYER] and ReLU(hidden[HIDDEN_LAYER]) = max(0,hidden[HIDDEN_LAYER])
     }
 
     for (i=0; i<OUTPUT_CLASS; i++) {  // hidden[HIDDEN_LAYER]*w2[HIDDEN_LAYER][OUTPUT_CLASS]
         for (j=0; j<HIDDEN_LAYER; j++) {
-            output[i] += mulfx(hidden[j], w2[j][i]);
+            output[i] += hidden[j] * w2[j][i];
         }
         output[i] += b2[i];  // +b2[OUTPUT_CLASS]
         if (output[i] > temp) { // predict
@@ -35,6 +37,6 @@ int dnn(
             label = i;
         }
     }
-    
+
 	return label;
 }

@@ -52,15 +52,15 @@ int main() {
 	b2_t b2_fp[OUTPUT_CLASS];
 
 	for(int i = 0; i < HIDDEN_LAYER; i++)
-		b1_fp[i] = ftofx(b1[i]);
+		b1_fp[i] = (b1[i]);
 	for(int i = 0; i < OUTPUT_CLASS; i++)
-		b2_fp[i] = ftofx(b2[i]);
+		b2_fp[i] = (b2[i]);
 	for(int i = 0; i < IMAGE_SIZE; i++)
 		for(int j = 0; j < HIDDEN_LAYER; j++)
-			w1_fp[i][j] = ftofx(w1[i][j]);
+			w1_fp[i][j] = (w1[i][j]);
 	for(int i = 0; i < HIDDEN_LAYER; i++)
 		for(int j = 0; j < OUTPUT_CLASS; j++)
-			w2_fp[i][j] = ftofx(w2[i][j]);
+			w2_fp[i][j] = (w2[i][j]);
 
 #ifdef PRINT_DEBUG
 	cout << "=================== Read Images ===================" << endl;
@@ -81,7 +81,7 @@ int main() {
 
 		image_t image_fp[IMAGE_SIZE];
 		for(int j = 0; j < IMAGE_SIZE; j++)
-			image_fp[j] = ftofx(image[j]);
+			image_fp[j] = (image[j]);
 
 		predict_labels[i] = dnn(image_fp, w1_fp, b1_fp, w2_fp, b2_fp);
 		fin.close();
