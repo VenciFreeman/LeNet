@@ -10,7 +10,6 @@ int dnn(
 )
 {
 	int label = 0; //label is the predicted result by dnn
-
     int i,j;
     FIXED temp = 0;
     FIXED hidden[HIDDEN_LAYER];
