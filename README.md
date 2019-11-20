@@ -25,5 +25,7 @@ This project aims to realize a simple 3-layer DNN with C++ and recognize the han
 - **testImage folder**: include 100 14*14 images in txt format, the label.txt includes the correct labels for these images.
 
 ## Other
-- Use PIPELINE, DATAFLOW, UNROLL, ARRAY_PARTITION and so on;
-- Use <ap_fixed> library provided by HLS to quantize the data so as to reduce the resource utilization and interval.
+- <ap_fixed> library provided by HLS can quantize the data so as to reduce the resource utilization and interval;
+- All input set as **HLS ARRAY_PARTITION** complete dim = i, i=1,2;
+- Loops with multiply set as **HLS PIPELINE**;
+- Loops without multiply set as **HLS_UNROLL**.
