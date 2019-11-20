@@ -52,15 +52,15 @@ int main() {
 	b2_t b2_fp[OUTPUT_CLASS];
 
 	for(int i = 0; i < HIDDEN_LAYER; i++)
-		b1_fp[i] = (b1[i]);
+		b1_fp[i] = b1[i];
 	for(int i = 0; i < OUTPUT_CLASS; i++)
-		b2_fp[i] = (b2[i]);
+		b2_fp[i] = b2[i];
 	for(int i = 0; i < IMAGE_SIZE; i++)
 		for(int j = 0; j < HIDDEN_LAYER; j++)
-			w1_fp[i][j] = (w1[i][j]);
+			w1_fp[i][j] = w1[i][j];
 	for(int i = 0; i < HIDDEN_LAYER; i++)
 		for(int j = 0; j < OUTPUT_CLASS; j++)
-			w2_fp[i][j] = (w2[i][j]);
+			w2_fp[i][j] = w2[i][j];
 
 #ifdef PRINT_DEBUG
 	cout << "=================== Read Images ===================" << endl;
