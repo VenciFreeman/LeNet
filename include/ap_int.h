@@ -71,8 +71,8 @@
 #error ap_int simulation header file is not applicable for synthesis
 #else
 
-#include "etc/ap_int_sim.h"
-#include "etc/ap_fixed_sim.h"
+#include "ap_int_sim.h"
+#include "ap_fixed_sim.h"
 
 //Forward declaration
 template<int _AP_W, int _AP_I, ap_q_mode _AP_Q, 
