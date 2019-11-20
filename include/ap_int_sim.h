@@ -95,7 +95,7 @@
 #endif
 
 #include <limits.h>
-#include"etc/ap_private.h"
+#include"ap_private.h"
 
 #ifdef _AP_DEBUG_
 #define AP_DEBUG(s) s
