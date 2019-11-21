@@ -24,20 +24,20 @@ int dnn(
 
     LOOP1H:for (i=0; i<HIDDEN_LAYER; i++){
 #pragma HLS UNROLL
-    	hidden[i]=0;
+    	hidden[i] = 0;
     }
     FIXED output[OUTPUT_CLASS];
 #pragma HLS ARRAY_PARTITION variable=output complete dim=1
     LOOP2H:for (i=0; i<OUTPUT_CLASS; i++){
 #pragma HLS UNROLL
-    	output[i]=0;
+    	output[i] = 0;
     }
     FIXED test[HIDDEN_LAYER];
 #pragma HLS ARRAY_PARTITION variable=hidden complete factor=16 dim=1
 
     LOOP3H:for (i=0; i<HIDDEN_LAYER; i++){
 #pragma HLS UNROLL
-    	test[i]=0;
+    	test[i] = 0;
     }
     // I tried to use b1[],b2[] instead of intermediate arrays, but there would be something wrong.
     //memset(hidden,0,HIDDEN_LAYER * sizeof(hidden[0]));
@@ -51,7 +51,7 @@ int dnn(
   // input_image[IMAGE_SIZE]*w1[IMAGE_SIZE][HIDDEN_LAYER]
         LOOP1J:for (j=0; j<HIDDEN_LAYER; j++) {
             test[j] = input_image[i] * w1[i][j];
-            hidden[j]+=test[j];
+            hidden[j] += test[j];
         }
     // hidden[i] = ReLU(temp,(hidden[i] + b1[i]));  // +b1[HIDDEN_LAYER] and ReLU(hidden[HIDDEN_LAYER]) = max(0,hidden[HIDDEN_LAYER])
     }
