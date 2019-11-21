@@ -1,7 +1,8 @@
+// A Test Bench.
 #include "dnn.h"
 
 int main() {
-	string DATA_PATH = "C:/Users/Venci/Documents/GitHub/simple_DNN/";
+	string DATA_PATH = "./simple_DNN/";	// Modify the path if necessary. 
 	float w1[IMAGE_SIZE][HIDDEN_LAYER], b1[HIDDEN_LAYER], w2[HIDDEN_LAYER][OUTPUT_CLASS], b2[OUTPUT_CLASS];
 #ifdef PRINT_DEBUG
 	cout << "=================== Read Weight ===================" << endl;
